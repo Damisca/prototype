@@ -25,7 +25,8 @@ public class Prototype extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        levelOne = new Level();
+        LevelOne levelOneSetup = new LevelOne();
+        levelOne = levelOneSetup.setupLevel();
         levelList = new ArrayList<>();
         levelList.add(levelOne);
 
