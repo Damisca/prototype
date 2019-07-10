@@ -15,8 +15,7 @@ public class Prototype extends Application {
     public static final double WIDTH = 640, HEIGHT = 512;
     private RunLoop runLoop;
     private boolean left, right;
-    Image levelOneBackground;
-    ImageView levelOneImageView;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -36,8 +35,9 @@ public class Prototype extends Application {
         primaryStage.show();
 
         createSceneEventHandling();
-        createSplashScreenNodes();
-        startRunLoop();
+        scene.setRoot(levelOne);
+        runLoop = new RunLoop(this);
+        runLoop.start();
     }
 
     private void createSceneEventHandling() {
@@ -57,21 +57,6 @@ public class Prototype extends Application {
                 case RIGHT: right = false; break;
             }
         });
-    }
-
-    private void createSplashScreenNodes() {
-
-        levelOneBackground = new Image("bg.png");
-        levelOneImageView = new ImageView(levelOneBackground);
-        levelOne.getChildren().add(levelOneImageView);
-
-        scene.setRoot(levelOne);
-    }
-
-    private void startRunLoop(
-            Prototype this) {
-        runLoop = new RunLoop(this);
-        runLoop.start();
     }
 
     public boolean isLeft() {

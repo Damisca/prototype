@@ -12,6 +12,7 @@ public class Level extends Group {
 
         if(left) System.out.println("left is true");
         if(right) System.out.println("right is true");
+
     }
 
     public Image getBackgroundImage() {

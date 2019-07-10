@@ -6,6 +6,8 @@ public class LevelOne {
     private Level level;
     private Image playerImage;
     private Player player;
+    Image levelOneBackground;
+    ImageView levelOneImageView;
 
     public LevelOne() { this.level = new Level();}
 
@@ -15,14 +17,15 @@ public class LevelOne {
         createActors();
         createCast();
         addNodes();
-        //addActors();
-
+        addActors();
         return level;
     }
 
     private void loadImageAssets() {
 
-        level.setBackgroundImage(new Image("bg.png"));
+        levelOneBackground = new Image("bg.png");
+        levelOneImageView = new ImageView(levelOneBackground);
+        level.getChildren().add(levelOneImageView);
 
         //if this if for the player we definitely don't want it here...
         playerImage = new Image("player.png");
@@ -30,10 +33,12 @@ public class LevelOne {
 
     public void createActors() {
 
-        player = new Player(0,0);
+        player = new Player(250,400);
+        player.setCurrentImage(new ImageView(playerImage));
     }
 
     private void createCast() {
+
         Cast cast = new Cast();
         cast.addCurrentCast(player);
         level.setCast(cast);
@@ -45,8 +50,12 @@ public class LevelOne {
         screenBackplate.setImage(level.getBackgroundImage());
         level.getChildren().add(screenBackplate);
     }
-/*    private void addActors(){
+    private void addActors(){
 
         level.getChildren().add(player.getCurrentImage());
-    }*/
+        for (Actor a : level.getCast().getCurrentCast()) {
+            a.getCurrentImage().setTranslateX(a.getInitialX());
+            a.getCurrentImage().setTranslateY(a.getInitialY());
+        }
+    }
 }
